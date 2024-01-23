@@ -4,6 +4,7 @@
 */
 
 :root {
+  /* Переменные цветов */
   --background-color: #000028;
 
   --logo-color: #DB00FF;
@@ -15,4 +16,18 @@
   --secondary-header-color: #000028;
   --text-color: #F1B2CE;
   --text-decoration-color: #FF0070;
+
+  /* Переменные шрифтов */
+  --main-font-family: "IBM Plex Mono";
+
+  --logo-font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
+  --main-font-size: 1.125rem;
+
+  --main-font-style: normal;
+
+  --main-font-weight: 400;
+  --header-font-weight: 700;
+
+  --main-line-height: 130%;
+  --logo-line-height: 82.5%;
 }
