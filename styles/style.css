@@ -11,7 +11,7 @@
 /* Классы хедера */
 
 .header {
-
+  
 }
 
 .decorated_zone {
@@ -19,7 +19,8 @@
 }
 
 .header__decoration-element {
-
+  position: absolute;
+  display: none;
 }
 
 .header__theme-menu {
