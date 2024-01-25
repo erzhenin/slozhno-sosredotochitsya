@@ -111,6 +111,7 @@
   padding: 0 0.8125rem;
   text-transform: lowercase;
   background-color: transparent;
+  cursor: pointer;
   min-inline-size: 4.375rem;
   min-block-size: 1.625rem;
 }
