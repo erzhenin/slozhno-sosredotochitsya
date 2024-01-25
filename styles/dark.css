@@ -11,7 +11,7 @@
   */
 
   /* Переменная фона */
-  --background-image: url(/images/cover-image-dark.png);
+  --background-image: url(../images/cover-image-dark.png);
 
   /* Переменные цветов */
   --background-color: #000028;

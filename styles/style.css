@@ -23,33 +23,36 @@
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   padding: 0.62rem;
-  block-size: 100svh;
+  min-block-size: clamp(41.75rem, 100svh, 100lvh);
 }
 
-.header::before {
+/* Вынес повторяющиеся свойства в отдельные сущности */
+.header::before,
+.header::after,
+.footer::before,
+.footer::after {
   content: "";
   position: absolute;
+  display: block;
+  background-color: transparent;
+  inline-size: 1.5625rem;
+  block-size: 1.5625rem;
+}
+
+.header::before,
+.footer::before {
   top: 0.62rem;
   right: 0.62rem;
-  display: block;
   border-inline-end: 0.0625em solid var(--accent-color);
   border-block-start: 0.0625em solid var(--accent-color);
-  background-color: transparent;
-  inline-size: 1.5625rem;
-  block-size: 1.5625rem;
 }
 
-.header::after {
-  content: "";
-  position: absolute;
+.header::after,
+.footer::after {
   bottom: 0.62rem;
   left: 0.62rem;
-  display: block;
   border-inline-start: 0.0625em solid var(--accent-color);
   border-block-end: 0.0625em solid var(--accent-color);
-  background-color: transparent;
-  inline-size: 1.5625rem;
-  block-size: 1.5625rem;
 }
 
 .header__decoration-element {
@@ -57,12 +60,13 @@
   top: 0.62rem;
   right: 2.4rem;
   color: var(--accent-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--main-font-weight);
   font-size: var(--main-font-size);
   font-style: var(--main-font-style);
   line-height: var(--main-line-height);
   text-align: center;
+  text-transform: uppercase;
 }
 
 .header__decoration-element::after {
@@ -72,8 +76,8 @@
   left: 2.625rem;
   display: block;
   border-radius: 100%;
+  box-shadow: 0 0 0.25rem 0.125rem var(--accent-color);
   background-color: var(--accent-color);
-  filter: drop-shadow(0 0 0.25rem var(--accent-color));
   inline-size: 0.625rem;
   block-size: 0.625rem;
 }
@@ -82,7 +86,6 @@
   justify-self: end;
   align-self: center;
   padding-block-start: 0.6rem;
-  min-block-size: 6.13rem;
   min-inline-size: 4.38rem;
 }
 
@@ -94,7 +97,7 @@
 
 .header__theme-menu-item {
   color: var(--accent-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--main-font-weight);
   font-size: var(--main-font-size);
   font-style: var(--main-font-style);
@@ -108,8 +111,8 @@
   padding: 0 0.8125rem;
   text-transform: lowercase;
   background-color: transparent;
-  inline-size: 4.375rem;
-  block-size: 1.625rem;
+  min-inline-size: 4.375rem;
+  min-block-size: 1.625rem;
 }
 
 .header__theme-menu-button:hover {
@@ -125,12 +128,13 @@
 
 .header__theme-menu-button_active {
   border: 0.0625em solid var(--accent-color);
+  pointer-events: none;
 }
 
 .header__logo {
   align-self: center;
   color: var(--logo-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--header-font-weight);
   font-size: var(--logo-font-size);
   font-style: var(--main-font-style);
@@ -143,7 +147,7 @@
   align-self: center;
   margin-block-end: 1rem;
   color: var(--secondary-header-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--header-font-weight);
   font-size: var(--main-font-size);
   font-style: var(--main-font-style);
@@ -167,7 +171,7 @@
 
 .section__title {
   color: var(--primary-header-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--header-font-weight);
   font-size: var(--main-font-size);
   font-style: var(--main-font-style);
@@ -191,7 +195,7 @@
 
 .section__article_title {
   color: var(--secondary-header-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--header-font-weight);
   font-size: var(--main-font-size);
   font-style: var(--main-font-style);
@@ -200,7 +204,7 @@
 
 .section__article_subtitle {
   color: var(--secondary-header-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--main-font-weight);
   font-size: var(--main-font-size);
   font-style: var(--main-font-style);
@@ -209,7 +213,7 @@
 
 .section__article_paragraph {
   color: var(--text-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--main-font-weight);
   font-size: var(--main-font-size);
   font-style: var(--main-font-style);
@@ -221,16 +225,17 @@
   text-shadow: 0.125rem 0.125rem 0 var(--text-decoration-color);
 }
 
-.link:focus-visible {
-  outline: none;
-}
-
 .link:hover {
   border-block-end: 0.0625rem solid var(--text-color);
 }
 
 .link:focus {
   border: 0.0625rem solid var(--text-color);
+  outline: none;
+}
+
+.link:focus-visible {
+  outline: none;
 }
 
 /* Секция с изображениями */
@@ -258,43 +263,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  block-size: 100svh;
+  min-block-size: clamp(41.75rem, 100svh, 100lvh);
 }
 
 .footer__logo {
   color: var(--logo-color);
-  font-family: var(--main-font-family);
+  font-family: var(--main-font-family, monospace, sans-serif);
   font-weight: var(--header-font-weight);
   font-size: var(--logo-font-size);
   font-style: var(--main-font-style);
   line-height: var(--logo-line-height);
   text-shadow: 0.125rem 0.125rem 0 var(--logo-accent-color);
-}
-
-.footer::before {
-  content: "";
-  position: absolute;
-  top: 0.62rem;
-  right: 0.62rem;
-  display: block;
-  border-inline-end: 0.0625em solid var(--accent-color);
-  border-block-start: 0.0625em solid var(--accent-color);
-  background-color: transparent;
-  inline-size: 1.5625rem;
-  block-size: 1.5625rem;
-}
-
-.footer::after {
-  content: "";
-  position: absolute;
-  bottom: 0.62rem;
-  left: 0.62rem;
-  display: block;
-  border-inline-start: 0.0625em solid var(--accent-color);
-  border-block-end: 0.0625em solid var(--accent-color);
-  background-color: transparent;
-  inline-size: 1.5625rem;
-  block-size: 1.5625rem;
 }
 
 /* Промежуток планшет-компьютер */
