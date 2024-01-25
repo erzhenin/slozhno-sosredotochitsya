@@ -174,6 +174,10 @@
   line-height: var(--main-line-height);
 }
 
+.section__title_is-sidebar {
+  grid-row: span 2;
+}
+
 .section__list {
   display: grid;
   gap: 1.25rem;
@@ -344,7 +348,7 @@
     padding-inline: 1.25rem;
   }
 
-  .rows {
+  .section_display_alternative {
     grid-template-columns: 1fr;
   }
 
@@ -428,7 +432,7 @@
     grid-template-columns: 1fr 2.06fr;
   }
 
-  .list-rows {
+  .section__list_display_alternative {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
