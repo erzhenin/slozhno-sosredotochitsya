@@ -26,33 +26,38 @@
   min-block-size: clamp(41.75rem, 100svh, 100lvh);
 }
 
-/* Вынес повторяющиеся свойства в отдельные сущности */
-.header::before,
-.header::after,
-.footer::before,
-.footer::after {
+/* Вся стилизация декоративных углов в отдельной сущности */
+.decorated-zone::before,
+.decorated-zone::after {
   content: "";
   position: absolute;
   display: block;
+  border-width: 0.0625rem;
+  border-style: solid;
+  border-color: var(--accent-color);
   background-color: transparent;
   inline-size: 1.5625rem;
   block-size: 1.5625rem;
 }
 
-.header::before,
-.footer::before {
+/* 
+  Здесь только позиционирование и удаление
+  ненужных границ для соответствующих декоративных углов
+  (теперь всё привязано к классу decorated-zone и его
+  можно переиспользовать).
+*/
+.decorated-zone::before {
   top: 0.62rem;
   right: 0.62rem;
-  border-inline-end: 0.0625em solid var(--accent-color);
-  border-block-start: 0.0625em solid var(--accent-color);
+  border-inline-start: none;
+  border-block-end: none;
 }
 
-.header::after,
-.footer::after {
+.decorated-zone::after {
   bottom: 0.62rem;
   left: 0.62rem;
-  border-inline-start: 0.0625em solid var(--accent-color);
-  border-block-end: 0.0625em solid var(--accent-color);
+  border-inline-end: none;
+  border-block-start: none;
 }
 
 .header__decoration-element {
@@ -290,16 +295,6 @@
     padding: 1.25rem;
   }
 
-  .header::before {
-    top: 1.25rem;
-    right: 1.25rem;
-  }
-
-  .header::after {
-    bottom: 1.25rem;
-    left: 1.25rem;
-  }
-
   .header__decoration-element {
     top: 1.25rem;
     right: 3rem;
@@ -366,13 +361,13 @@
     grid-column: span 2;
   }
 
-  /* Медиа-классы для подвала */
-  .footer::before {
+  /* Медиа-классы для декоративных углов */
+  .decorated-zone::before {
     top: 1.25rem;
     right: 1.25rem;
   }
 
-  .footer::after {
+  .decorated-zone::after {
     bottom: 1.25rem;
     left: 1.25rem;
   }
